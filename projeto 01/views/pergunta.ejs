@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+    <body>
+        <div>
+            <%- include('partials/navbar') %>
+        </div>
+
+        <div class="container">
+            <hr>
+            <h2>
+                <%=pergunta.titulo%>
+            </h2>
+            <hr>
+
+            <p>
+                <%=pergunta.descricao%>
+            </p>
+            <br>
+            <hr>
+
+            <form method="post" action="/responder">
+
+
+                <div class="form-group">
+                    <label for="descrição">resposta</label>
+                    <textarea class="form-control" id="descrição" placeholder="disgite sua responta" name="corpo"
+                        rows="3"></textarea>
+                </div>
+                <input type="hidden" name="pergunta" value=" <%=pergunta.id%>">
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="responder">
+                </div>
+            </form>
+
+            <% respostas.forEach(respsota=> { %>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h3>
+                            <%=respsota.corpo%>
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <p style="text-align: end;">
+                           
+                            <%= moment(respsota.createdAt).format( 'DD/mm/yy  hh:mm') %>
+                        </p>
+
+                    </div>
+                </div>
+                <% })%>
+
+
+        </div>
+
+    </body>
+    <div>
+        <%- include('partials/footer') %>
+    </div>

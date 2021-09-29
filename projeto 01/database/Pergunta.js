@@ -9,11 +9,10 @@ const Pergunta = connection.define("pergunta", {
   descricao: {
     type: Sequelize.TEXT,
     allowNull: false,
-  },
+  }, 
 });
 
+Pergunta.sync({force: false}).then(()=>{})
 
-
-
-    Pergunta.sync({ force: false })
+module.exports = Pergunta;
    
