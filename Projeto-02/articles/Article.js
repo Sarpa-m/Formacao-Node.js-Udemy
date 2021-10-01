@@ -3,7 +3,7 @@ const connection = require('../database/database')
 
 const Category = require("../categories/Category")
 
-const Article = connection.define('articles',{
+const Article = connection.define('Article',{
     title: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -22,6 +22,6 @@ const Article = connection.define('articles',{
 Category.hasMany(Article);
 Article.belongsTo(Category);
 
-Article.sync({force: true})
+Article.sync({force: false})
 
 module.exports = Article;
