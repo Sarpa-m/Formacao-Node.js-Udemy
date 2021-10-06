@@ -1,0 +1,70 @@
+<%- include('../../partials/header') %>
+
+
+    <body>
+        <div>
+            <%- include('../../partials/navbar') %>
+        </div>
+
+        <div class="container">
+            <hr>
+            <h2>Categorias</h2><br>
+
+            <a class="btn btn-success" href="/admin/categories/new">Novo</a>
+            <hr>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Slug</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% categories.forEach(Category=> {%>
+                        <tr>
+                            <th>
+                                <%= Category.id %>
+                            </th>
+                            <th>
+                                <%= Category.title %>
+                            </th>
+                            <th>
+                                <%= Category.slug %>
+                            </th>
+                            <th>
+                                <a href="categories/edit/<%= Category.id %>" class="btn btn-warning">Editar</a>
+
+                                <form action="/categories/delete" method="post" style="display: inline;"
+                                    onsubmit="conf(event, this)">
+
+                                    <input type="hidden" name="id" value=" <%= Category.id %>">
+                                    <button type="submit" class="btn btn-danger">Deletar</button>
+                                </form>
+                            </th>
+                        </tr>
+                        <%})%>
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+    <div>
+        <%- include('../../partials/footer') %>
+            <script>
+                function conf(e, form) {
+                    e.preventDefault();
+                    var decision = confirm("Voce quer deletar esta categoria \n" + e.path[2].childNodes[3].innerText)
+                    if (decision) {
+                        console.log(e.path[2].childNodes[3].innerText);
+                        console.log('deletear');
+                        form.submit();
+                    } else {
+                        console.log('não deletear')
+
+                    }
+                }
+            </script>
+    </div>
